@@ -121,7 +121,7 @@ bool parseVariablesMap(SnapshotterOptions& opts, po::variables_map const& vm)
       opts.addTopic(str);
     }
   }
-  opts.default_memory_limit_ = static_cast<int>(MB_TO_BYTES * vm["size"].as<double>());
+  opts.default_memory_limit_ = static_cast<int64_t>(MB_TO_BYTES * vm["size"].as<double>());
   opts.default_duration_limit_ = ros::Duration(vm["duration"].as<double>());
   opts.default_count_limit_ =  vm["count"].as<int32_t>();
   if (vm.count("no-clear"))
@@ -175,7 +175,7 @@ void appendParamOptions(ros::NodeHandle& nh, SnapshotterOptions& opts)
   int32_t default_count;
   bool clear_buffer;
   if (nh.getParam("default_memory_limit", tmp))
-    opts.default_memory_limit_ = static_cast<int>(MB_TO_BYTES * tmp);
+    opts.default_memory_limit_ = static_cast<int64_t>(MB_TO_BYTES * tmp);
   if (nh.getParam("default_duration_limit", tmp))
     opts.default_duration_limit_ = ros::Duration(tmp);
   if (nh.getParam("default_count_limit", default_count))
@@ -241,7 +241,7 @@ void appendParamOptions(ros::NodeHandle& nh, SnapshotterOptions& opts)
         if (mem_limit.getType() == XmlRpcValue::TypeDouble)
         {
           double mb = mem_limit;
-          mem = static_cast<int>(MB_TO_BYTES * mb);
+          mem = static_cast<int64_t>(MB_TO_BYTES * mb);
         }
         else if (mem_limit.getType() == XmlRpcValue::TypeInt)
         {

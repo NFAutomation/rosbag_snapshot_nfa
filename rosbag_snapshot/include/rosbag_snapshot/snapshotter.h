@@ -78,7 +78,7 @@ struct ROSBAG_DECL SnapshotterTopicOptions
   // Maximum difference in time from newest and oldest message in buffer before older messages are removed
   ros::Duration duration_limit_;
   // Maximum memory usage of the buffer before older messages are removed
-  int32_t memory_limit_;
+  int64_t memory_limit_;
   // Maximum number of message in the buffer before older messages are removed
   int32_t count_limit_;
 
@@ -94,7 +94,7 @@ struct ROSBAG_DECL SnapshotterOptions
   // Duration limit to use for a topic's buffer if one is not specified
   ros::Duration default_duration_limit_;
   // Memory limit to use for a topic's buffer if one is not specified
-  int32_t default_memory_limit_;
+  int64_t default_memory_limit_;
   // Count limit to use for a topic's buffer if one is not specified
   int32_t default_count_limit_;
   // Period between publishing topic status messages. If <= ros::Duration(0), don't publish status

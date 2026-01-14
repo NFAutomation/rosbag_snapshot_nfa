@@ -368,10 +368,14 @@ bool Snapshotter::writeTopic(rosbag::Bag& bag, MessageQueue& message_queue, stri
   // write queue
   try
   {
+    ros::Time current_time = ros::Time::now();
     for (MessageQueue::range_t::first_type msg_it = range.first; msg_it != range.second; ++msg_it)
     {
       SnapshotMessage const& msg = *msg_it;
-      bag.write(topic, msg.time, msg.msg, msg.connection_header);
+      ros::Duration message_age = current_time - msg.time;
+      if (message_age < message_queue.options_.duration_limit_){
+        bag.write(topic, msg.time, msg.msg, msg.connection_header);
+      }
     }
   }
   catch (rosbag::BagException const& err)
