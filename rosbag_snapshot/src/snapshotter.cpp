@@ -371,7 +371,9 @@ bool Snapshotter::writeTopic(rosbag::Bag& bag, MessageQueue& message_queue, stri
     for (MessageQueue::range_t::first_type msg_it = range.first; msg_it != range.second; ++msg_it)
     {
       SnapshotMessage const& msg = *msg_it;
-      bag.write(topic, msg.time, msg.msg, msg.connection_header);
+      if (msg.time > req.start_time){
+        bag.write(topic, msg.time, msg.msg, msg.connection_header);
+      }
     }
   }
   catch (rosbag::BagException const& err)

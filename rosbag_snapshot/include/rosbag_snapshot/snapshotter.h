@@ -94,7 +94,7 @@ struct ROSBAG_DECL SnapshotterOptions
   // Duration limit to use for a topic's buffer if one is not specified
   ros::Duration default_duration_limit_;
   // Memory limit to use for a topic's buffer if one is not specified
-  int32_t default_memory_limit_;
+  int64_t default_memory_limit_;
   // Count limit to use for a topic's buffer if one is not specified
   int32_t default_count_limit_;
   // Period between publishing topic status messages. If <= ros::Duration(0), don't publish status
